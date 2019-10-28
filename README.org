@@ -1,0 +1,19 @@
+* dotfiles
+  My dot config files
+
+* Install
+1. Install dependency
+   - Archlinux/Manjaro
+	 #+BEGIN_SRC bash
+	 sudo pacman -S git tmux
+	 #+END_SRC
+   - Ubuntu
+	 #+BEGIN_SRC bash
+	 sudo apt-get install git tmux
+	 #+END_SRC
+2. Install Configurations
+   #+BEGIN_SRC bash
+   git clone https://github.com/schspa/dotfiles.git ~/dotfiles
+   cd ~/dotfiles
+   ./install.sh
+   #+END_SRC
