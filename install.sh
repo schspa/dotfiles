@@ -9,3 +9,6 @@ if [ ! -d "$HOME/.tmux/plugins" ]; then
 	git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 ln -sf ${current_path}/tmux.conf $HOME/.tmux.conf
+
+# setup qutuebrowser
+ln -sf ${current_path}/qutebrowser/config/config.py $HOME/.config/qutebrowser/config.py
