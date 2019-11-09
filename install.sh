@@ -12,3 +12,7 @@ ln -sf ${current_path}/tmux.conf $HOME/.tmux.conf
 
 # setup qutuebrowser
 ln -sf ${current_path}/qutebrowser/config/config.py $HOME/.config/qutebrowser/config.py
+
+ln -sf ${current_path}/config/i3 $HOME/.config/i3
+ln -sf ${current_path}/config/polybar $HOME/.config/polybar
+ln -sf ${current_path}/config/mpd $HOME/.config/mpd
