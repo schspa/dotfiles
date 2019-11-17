@@ -42,10 +42,10 @@ font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=12;1"
 font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=12;1"
 font-4 = "material icons:pixelsize=16;3"
 
-modules-left = i3
+modules-left = i3 xwindow
+modules-center = date mpd
 ;modules-center = mpd
-;modules-center = mpd
-modules-right = alsa wlan cpu memory temperature battery date
+modules-right = pulseaudio wlan cpu memory temperature battery powermenu
 
 tray-position = right
 tray-padding = 2
@@ -199,7 +199,7 @@ type = internal/network
 interface = wlp0s20f3
 interval = 3.0
 
-format-connected = <ramp-signal>
+format-connected = <ramp-signal> <label-connected>
 ;format-connected-underline = #9f78e1
 label-connected = "%essid%"
 
@@ -238,7 +238,7 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date = " %Y-%m-%d"
+date = " %Y-%m-%d W%V "
 ;date-alt = " %Y-%m-%d"
 
 time = %H:%M
@@ -250,34 +250,48 @@ format-prefix = 
 
 label = %date% %time%
 
+[module/pulseaudio]
+type = internal/pulseaudio
 
-[module/alsa]
-type = internal/volume
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+;; sink = alsa_output.pci-0000_12_00.3.analog-stereo
 
-format-volume = <label-volume> <bar-volume>
-label-volume = 
-label-volume-foreground = ${root.foreground}
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
 
-format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
-label-muted = sound muted
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
 
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+; Available tags:
+;   <label-volume> (default)
+;   <ramp-volume>
+;   <bar-volume>
+format-volume = <ramp-volume> <label-volume>
+
+; Available tags:
+;   <label-muted> (default)
+;   <ramp-volume>
+;   <bar-volume>
+;format-muted = <label-muted>
+
+; Available tokens:
+;   %percentage% (default)
+;   %decibels% (unreleased)
+;label-volume = %percentage%%
+
+; Available tokens:
+;   %percentage% (default)
+;   %decibels% (unreleased)
+label-muted =  muted
+label-muted-foreground = #666
+
+; Only applies if <ramp-volume> is used
+ramp-volume-0 = 🔈
+ramp-volume-1 = 🔉
+ramp-volume-2 = 
 
 [module/battery]
 type = internal/battery
@@ -327,6 +341,16 @@ ramp-1 = 
 ramp-2 = 
 ;ramp-foreground = ${colors.foreground-alt}
 
+[module/backlight]
+type = internal/xbacklight
+
+; XRandR output to get get values from
+; Default: the monitor defined for the running bar
+output = eDP-1
+
+; Create scroll handlers used to set the backlight value
+; Default: true
+enable-scroll = true
 [module/powermenu]
 type = custom/menu
 expand-right = true
