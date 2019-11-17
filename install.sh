@@ -16,3 +16,4 @@ ln -sf ${current_path}/qutebrowser/config/config.py $HOME/.config/qutebrowser/co
 ln -sf ${current_path}/config/i3 $HOME/.config/i3
 ln -sf ${current_path}/config/polybar $HOME/.config/polybar
 ln -sf ${current_path}/config/mpd $HOME/.config/mpd
+ln -sf ${current_path}/config/autorandr $HOME/.config/autorandr

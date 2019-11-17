@@ -26,12 +26,13 @@ font pango:monospace 8
 
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
-set $up k
-set $down j
-set $left h
+set $up i
+set $down k
+set $left j
 set $right l
 set $mod Mod4
 
+mouse_warping none
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -43,50 +44,31 @@ bindsym $mod+Return exec xfce4-terminal
 bindsym $mod+F3 exec amixer set Master 5%+
 bindsym $mod+F2 exec amixer set Master 5%-
 bindsym $mod+F1 exec amixer set Master toggle
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
+bindsym XF86AudioLowerVolume exec amixer set Master 5%-
+bindsym XF86AudioMute exec amixer set Master toggle
+
 
 # i3lock
 bindsym $mod+F12 exec i3lock-fancy
 
-# start the firefox
-bindsym $mod+Shift+f exec firefox
-
 # start the bluetooth
-bindsym $mod+Shift+b exec blueberry
+bindsym $mod+Shift+b exec blueman-manager
 
-# start the rem
-bindsym $mod+Control+r exec remarkable
-
-# start slack
-bindsym $mod+Control+k exec slack
-
-# start the win10
-bindsym $mod+Shift+v exec VBoxManage startvm "win10" --type gui
+# start the win7
+bindsym $mod+Shift+v "exec VBoxManage startvm \"Windows7\" --type gui"
 
 # start the chromium
 bindsym $mod+Shift+g exec chromium
 
-# ss
-bindsym $mod+Shift+s exec bash ~/.ss.sh
-
-# wps, et, wpp
-bindsym $mod+Control+w exec wps
-bindsym $mod+Control+e exec et
-bindsym $mod+Control+p exec wpp
-
-# thunderbird
-bindsym $mod+Control+t exec thunderbird
-
 # kill focused window
 bindsym $mod+Shift+q kill
-
-# steam
-bindsym $mod+Control+s exec steam
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run
 #
 # run rofi
-bindsym $mod+d exec rofi -show run
+bindsym $mod+d exec rofi -show combi
 
 # arandr
 bindsym $mod+Shift+n exec arandr
@@ -155,10 +137,10 @@ bindsym $mod+minus scratchpad show
 # use window title, but no border
 bindsym $mod+t border normal 0
 # use no window title and a thick border
-bindsym $mod+y border pixel 3
+bindsym $mod+y border pixel 5
 # use neither window title nor border
 bindsym $mod+u border none
-
+hide_edge_borders smart
 
 # workspace names
 set $ws1 1:
@@ -185,16 +167,16 @@ bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
 # assign
 # assign [class="chromium"] $ws4
@@ -202,15 +184,13 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 # assign [class="wps"] $ws6
 # assign [class="et"] $ws6
 # assign [class="wpp"] $ws6
-# assign [class="virtualbox"] $ws9
 # assign [class="steam"] $ws5
 # assign [class="thunderbird"] $ws7
 # assign [class="slack"] $ws8
-# assign [class="virtualbox"] $ws9
+assign [class="VirtualBox"] $ws10
+assign [instance="wxwork.exe"] $ws5
 
-# for_window [instance="Steam"] floating enable
-# for_window [instance="Steam"] border none
-
+for_window [class="Xfce4-appfinder"] floating enable
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -218,8 +198,8 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-gaps inner 10
-gaps outer 5
+gaps inner 5
+gaps outer 0
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -279,13 +259,30 @@ bindsym $mod+r mode "resize"
 new_window pixel 0
 
 # background
-exec_always --no-startup-id feh --bg-scale "/home/kuari/Picture/girl.png"
+exec_always --no-startup-id feh --bg-scale "/home/schspa/Pictures/CoolMarket/da3c518c3043ad202e7e31e41e0337f8.jpg"
 
 # screen timeout
-exec --no-startup-id xset dpms 600 800 900
+# exec --no-startup-id xset dpms 600 800 900
+# power manager
+exec --no-startup-id mate-power-manager
 
-# xrandr
-exec --no-startup-id xrandr --output eDP1 --mode 1920x1080 --same-as HDMI2
+# autorandr
+exec --no-startup-id autorandr --change --force --default default
+
+# auto startup
+exec --no-startup-id seahorse-daemon &
+exec --no-startup-id blueman-applet &
+exec --no-startup-id fcitx &
+exec --no-startup-id compton -b &
+exec --no-startup-ip nm-applet &
+exec --no-startup-id /usr/lib/gsd-xsettings &
+exec --no-startup-id xss-lock -- i3lock-fancy &
+exec --no-startup-id /opt/Qv2ray/bin/Qv2ray &
+exec --no-startup-id syncthing -no-browser &
+
+
+bindsym $mod+Tab workspace back_and_forth
+workspace_auto_back_and_forth yes
 
 # polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
