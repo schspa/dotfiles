@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 notify-send "Connecting to work environment"
-i3-msg '[workspace="^(1|4|6)"] move workspace to output HDMI-1;'
+i3-msg '[workspace="^(1|4|6|9)"] move workspace to output HDMI-1;'
