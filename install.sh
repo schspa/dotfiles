@@ -26,6 +26,9 @@ fi
 
 ln -sf ${current_path}/.zshrc $HOME/.zshrc
 
+echo "setup ssh"
+ln -sf ${current_path}/ssh/config $HOME/.ssh/config
+
 # setup qutuebrowser
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	# ~/.config/qutebrowser/config.py

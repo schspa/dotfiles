@@ -1,0 +1,8 @@
+
+if [[ "$SSH_CONNECTION" != "" && "$SCHSPA_SSHFS_DIR" != "" && "$SCHSPA_SSHFS_TARGET" != "" ]]; then
+	echo "mount sshfs on $SCHSPA_SSHFS_TARGET"
+	if [ "`ls -A ${SCHSPA_SSHFS_TARGET}`" = "" ]; then
+		sshfs $(echo $SSH_CONNECTION | awk '{print $1}'):$SCHSPA_SSHFS_DIR "$HOME/$SCHSPA_SSHFS_TARGET"
+	fi
+fi
+

@@ -154,3 +154,7 @@ vterm_prompt_end() {
     vterm_printf "51;A$(whoami)@$(hostname):$(pwd)";
 }
 PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
+
+if [ -r $DOTFILES_DIR ]; then
+	source $DOTFILES_DIR/shellrc
+fi
