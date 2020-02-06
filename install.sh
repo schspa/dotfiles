@@ -9,6 +9,7 @@ if [ ! -d "$HOME/.tmux/plugins" ]; then
 	git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 ln -sf ${current_path}/tmux.conf $HOME/.tmux.conf
+ln -sf ${current_path}/.zshrc $HOME/.zshrc
 
 # setup qutuebrowser
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
