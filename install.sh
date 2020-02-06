@@ -2,6 +2,7 @@
 
 current_path=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 
+echo "Setup tmux"
 # setup tmux
 if [ ! -d "$HOME/.tmux/plugins" ]; then
 	echo "Clone tmux-plugins to $HOME/.tmux/plugins/tmp"
@@ -9,6 +10,20 @@ if [ ! -d "$HOME/.tmux/plugins" ]; then
 	git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 ln -sf ${current_path}/tmux.conf $HOME/.tmux.conf
+
+echo "Setup on-my-zsh"
+if [ ! -d "~/.oh-my-zsh" ]; then
+	echo "install on-my-zsh"
+	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+ZSH_CUSTOM=~/.oh-my-zsh/custom
+
+if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
+	echo "install powerlevel10k theme"
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+fi
+
 ln -sf ${current_path}/.zshrc $HOME/.zshrc
 
 # setup qutuebrowser
