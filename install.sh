@@ -12,7 +12,7 @@ fi
 ln -sf ${current_path}/tmux.conf $HOME/.tmux.conf
 
 echo "Setup on-my-zsh"
-if [ ! -d "~/.oh-my-zsh" ]; then
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
 	echo "install on-my-zsh"
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
