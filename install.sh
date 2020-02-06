@@ -13,14 +13,11 @@ ln -sf ${current_path}/tmux.conf $HOME/.tmux.conf
 
 echo "Setup on-my-zsh"
 if [ ! -d "~/.oh-my-zsh" ]; then
-	echo "install asan"
+	echo "install on-my-zsh"
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-if [ ! -d "~/.oh-my-zsh" ]; then
-	echo "install asan"
-	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
+ZSH_CUSTOM=~/.oh-my-zsh/custom
 
 if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
 	echo "install powerlevel10k theme"
