@@ -1,0 +1,40 @@
+patch:
+  show_notifications_when: appropriate # 状态通知，适当，也可设为全开（always）全关（never）
+  style:
+    color_scheme: psionics
+    horizontal: false                                   # 水平排列
+    inline_preedit: true                               # 单行显示，false双行显示
+    candidate_format: "%c\u2005%@ \u2005 \u2005"       # 用 1/6 em 空格 U+2005 来控制编号 %c 和候选词 %@ 前后的空间。
+    corner_radius: 5                                   # 候选条圆角
+    border_height: 6                                   # 窗口边界高度，大于圆角半径才生效
+    border_width: 6                                    # 窗口边界宽度，大于圆角半径才生效
+    font_face: "PingFangSC-Regular,HanaMinB"           # 候选词字体
+    font_point: 18                                     # 候选字词大小
+    label_font_face: "STHeitiSC-Light"                 # 候选词编号字体
+    label_font_point: 16                               # 候选编号大小
+
+  # 默认使用ascii输入，不用中文输入
+  # app的名字可以在/Applications/的app目录中的Info.plist里面查找
+  app_options:
+    com.apple.dt.Xcode:
+      ascii_mode: true
+    com.runningwithcrayons.Alfred:
+      ascii_mode: true
+    com.googlecode.iterm2:
+      ascii_mode: true
+    com.microsoft.VSCode:
+      ascii_mode: true
+    com.apple.finder:
+      ascii_mode: true
+    com.apple.appstore:
+      ascii_mode: true
+    com.apple.systempreferences:
+      ascii_mode: true
+    com.apple.keychainaccess:
+      ascii_mode: true
+    org.macosforge.xquartz.X11:
+      ascii_mode: true
+    org.gnu.Emacs:
+      ascii_mode: true
+
+  us_keyboard_layout: true
