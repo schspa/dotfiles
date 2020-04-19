@@ -102,7 +102,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+g split h
+bindsym $mod+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -273,23 +273,35 @@ exec --no-startup-id mate-power-manager
 # autorandr
 exec --no-startup-id autorandr --change --force --default default
 
+# polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+
+# ---------------------------------------------------------------------
+# NETWORKING
+# ---------------------------------------------------------------------
+exec --no-startup-id eval $(gnome-keyring-daemon --start)
+exec --no-startup-id export SSH_AUTH_SOCK
+
+exec --no-startup-id nm-applet
+
+# ---------------------------------------------------------------------
+# INPUT
+# ---------------------------------------------------------------------
+exec --no-startup-id ibus-daemon --xim -d -r
+
+
 # auto startup
 exec --no-startup-id seahorse-daemon &
 exec --no-startup-id blueman-applet &
-exec --no-startup-id fcitx &
 exec --no-startup-id compton -b &
-exec --no-startup-ip nm-applet &
 exec --no-startup-id /usr/lib/gsd-xsettings &
 exec --no-startup-id xss-lock -- i3lock-fancy &
-exec --no-startup-id /opt/Qv2ray/bin/Qv2ray &
 exec --no-startup-id syncthing -no-browser &
-
 
 bindsym $mod+Tab workspace back_and_forth
 workspace_auto_back_and_forth yes
 
-# polybar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 #######################################################################
 # automatically start i3-config-wizard to offer the user to create a
