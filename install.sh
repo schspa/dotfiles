@@ -53,13 +53,21 @@ fi
 
 echo "setup rime"
 if [[ "$OSTYPE" == "darwin"* ]]; then
+	echo "macos"
+	RIME_PATH="~/Library/Rime"
 	ln -sf ${current_path}/rime/squirrel.custom.yaml ~/Library/Rime/squirrel.custom.yaml
-	ln -sf ${current_path}/rime/luna_pinyin_simp.custom.yaml ~/Library/Rime/luna_pinyin_simp.custom.yaml
-	ln -sf ${current_path}/rime/default.custom.yaml ~/Library/Rime/default.custom.yaml
+elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+	echo "linux"
+	RIME_PATH="$HOME/.config/fcitx/rime"
+fi
 
-	ln -sf ${current_path}/rime/extend_dictionaries20140909/luna_pinyin.hanyu.dict.yaml	~/Library/Rime/luna_pinyin.hanyu.dict.yaml
-	ln -sf ${current_path}/rime/extend_dictionaries20140909/luna_pinyin.extended.dict.yaml ~/Library/Rime/luna_pinyin.extended.dict.yaml
-	ln -sf ${current_path}/rime/extend_dictionaries20140909/luna_pinyin.poetry.dict.yaml ~/Library/Rime/luna_pinyin.poetry.dict.yaml
-	ln -sf ${current_path}/rime/extend_dictionaries20140909/luna_pinyin.cn_en.dict.yaml ~/Library/Rime/luna_pinyin.cn_en.dict.yaml
+if [[ $RIME_PATH != "" ]]; then
+	echo "Symlink to $RIME_PATH"
+	ln -sf ${current_path}/rime/luna_pinyin_simp.custom.yaml $RIME_PATH/luna_pinyin_simp.custom.yaml
+	ln -sf ${current_path}/rime/default.custom.yaml $RIME_PATH/default.custom.yaml
 
+	ln -sf ${current_path}/rime/extend_dictionaries20140909/luna_pinyin.hanyu.dict.yaml	$RIME_PATH/luna_pinyin.hanyu.dict.yaml
+	ln -sf ${current_path}/rime/extend_dictionaries20140909/luna_pinyin.extended.dict.yaml $RIME_PATH/luna_pinyin.extended.dict.yaml
+	ln -sf ${current_path}/rime/extend_dictionaries20140909/luna_pinyin.poetry.dict.yaml $RIME_PATH/luna_pinyin.poetry.dict.yaml
+	ln -sf ${current_path}/rime/extend_dictionaries20140909/luna_pinyin.cn_en.dict.yaml $RIME_PATH/luna_pinyin.cn_en.dict.yaml
 fi
