@@ -1,0 +1,9 @@
+
+if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
+    function sendtoemacs(){
+        printf  "\e]51;Efind-file \"$@\"\e\\"
+    }
+    sendtoemacs $@
+else
+    emacsclient -nw $@
+fi

@@ -1,7 +1,6 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 DOTFILES_DIR=$(dirname `realpath ~/.zshrc`)
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:$DOTFILES_DIR/bin:/usr/local/bin:$PATH
 
 if [ -r $DOTFILES_DIR ]; then
 	source $DOTFILES_DIR/shellrc
@@ -77,6 +76,8 @@ fi
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	docker
+    git
+    emacs
 )
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	plugins+=(
@@ -95,6 +96,8 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
+export EDITOR='editor'
+
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
