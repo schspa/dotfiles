@@ -1,11 +1,13 @@
-ForwardX11 yes
-ForwardX11Trusted yes
-RemoteForward 1080 localhost:1080
+ServerAliveInterval 50
+ServerAliveCountMax 3
 
 # my virtual machine
 # add AcceptEnv SCHSPA_* to sshd_config
 Host arch
 	ForwardAgent yes
+    ForwardX11 yes
+    ForwardX11Trusted yes
+    RemoteForward 1080 localhost:1080
 	HostName localhost
 	User schspa
 	Port 2222
