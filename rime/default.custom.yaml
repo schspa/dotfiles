@@ -13,11 +13,3 @@ patch:
     - when: has_menu
       accept: bracketright
       send: Page_Down
-
-  ascii_composer/good_old_caps_lock: true   # 中西文切换快捷键
-  ascii_composer/switch_key:
-    Caps_Lock: noop
-    Shift_L: inline_ascii
-    Shift_R: noop
-    Control_L: noop
-    Control_R: noop

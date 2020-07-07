@@ -16,25 +16,5 @@ patch:
   # 默认使用ascii输入，不用中文输入
   # app的名字可以在/Applications/的app目录中的Info.plist里面查找
   app_options:
-    com.apple.dt.Xcode:
-      ascii_mode: true
-    com.runningwithcrayons.Alfred:
-      ascii_mode: true
-    com.googlecode.iterm2:
-      ascii_mode: true
-    com.microsoft.VSCode:
-      ascii_mode: true
-    com.apple.finder:
-      ascii_mode: true
-    com.apple.appstore:
-      ascii_mode: true
-    com.apple.systempreferences:
-      ascii_mode: true
-    com.apple.keychainaccess:
-      ascii_mode: true
-    org.macosforge.xquartz.X11:
-      ascii_mode: true
-    org.gnu.Emacs:
-      ascii_mode: true
 
   us_keyboard_layout: true
