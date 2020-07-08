@@ -54,7 +54,7 @@ fi
 echo "setup rime"
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	echo "macos"
-	RIME_PATH="~/Library/Rime"
+	RIME_PATH="${HOME}/Library/Rime"
 	ln -sf ${current_path}/rime/squirrel.custom.yaml ~/Library/Rime/squirrel.custom.yaml
 elif [[ "$OSTYPE" == "linux-gnu" ]]; then
 	echo "linux"
@@ -62,7 +62,7 @@ elif [[ "$OSTYPE" == "linux-gnu" ]]; then
 fi
 
 if [[ $RIME_PATH != "" ]]; then
-	echo "Symlink to $RIME_PATH"
+	echo "Symlink ${current_path} to $RIME_PATH"
 	ln -sf ${current_path}/rime/luna_pinyin_simp.custom.yaml $RIME_PATH/luna_pinyin_simp.custom.yaml
 	ln -sf ${current_path}/rime/default.custom.yaml $RIME_PATH/default.custom.yaml
 
