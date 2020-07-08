@@ -66,8 +66,9 @@ if [[ $RIME_PATH != "" ]]; then
 	ln -sf ${current_path}/rime/luna_pinyin_simp.custom.yaml $RIME_PATH/luna_pinyin_simp.custom.yaml
 	ln -sf ${current_path}/rime/default.custom.yaml $RIME_PATH/default.custom.yaml
 
-	ln -sf ${current_path}/rime/extend_dictionaries20140909/luna_pinyin.hanyu.dict.yaml	$RIME_PATH/luna_pinyin.hanyu.dict.yaml
-	ln -sf ${current_path}/rime/extend_dictionaries20140909/luna_pinyin.extended.dict.yaml $RIME_PATH/luna_pinyin.extended.dict.yaml
-	ln -sf ${current_path}/rime/extend_dictionaries20140909/luna_pinyin.poetry.dict.yaml $RIME_PATH/luna_pinyin.poetry.dict.yaml
-	ln -sf ${current_path}/rime/extend_dictionaries20140909/luna_pinyin.cn_en.dict.yaml $RIME_PATH/luna_pinyin.cn_en.dict.yaml
+	ln -sf ${current_path}/rime/extend_dictionaries/luna_pinyin.hanyu.dict.yaml	$RIME_PATH/luna_pinyin.hanyu.dict.yaml
+	ln -sf ${current_path}/rime/extend_dictionaries/luna_pinyin.extended.dict.yaml $RIME_PATH/luna_pinyin.extended.dict.yaml
+	ln -sf ${current_path}/rime/extend_dictionaries/luna_pinyin.poetry.dict.yaml $RIME_PATH/luna_pinyin.poetry.dict.yaml
+	ln -sf ${current_path}/rime/extend_dictionaries/luna_pinyin.cn_en.dict.yaml $RIME_PATH/luna_pinyin.cn_en.dict.yaml
+	ln -sf ${current_path}/rime/extend_dictionaries/luna_pinyin.sogou.dict.yaml $RIME_PATH/luna_pinyin.sogou.dict.yaml
 fi
