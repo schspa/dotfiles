@@ -72,3 +72,8 @@ if [[ $RIME_PATH != "" ]]; then
 	ln -sf ${current_path}/rime/extend_dictionaries/luna_pinyin.cn_en.dict.yaml $RIME_PATH/luna_pinyin.cn_en.dict.yaml
 	ln -sf ${current_path}/rime/extend_dictionaries/luna_pinyin.sogou.dict.yaml $RIME_PATH/luna_pinyin.sogou.dict.yaml
 fi
+
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    source ${current_path}/macos/install.sh
+fi

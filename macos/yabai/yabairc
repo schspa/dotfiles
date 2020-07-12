@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+# ====== Variables =============================
+
+gaps_top="0"
+gaps_bottom="10"
+gaps_left="10"
+gaps_right="10"
+gaps_inner="10"
+
+
+# ====== Tiling settings =======================
+
+# 使用 font-awesome 替代罗马数字
+ yabai -m config layout                      bsp
+
+# bar settings
+
+yabai -m config top_padding                 "${gaps_top}"
+yabai -m config bottom_padding              "${gaps_bottom}"
+yabai -m config left_padding                "${gaps_left}"
+yabai -m config right_padding               "${gaps_right}"
+yabai -m config window_gap                  "${gaps_inner}"
+
+yabai -m config mouse_follows_focus         off
+yabai -m config focus_follows_mouse         off
+
+yabai -m config mouse_modifier              fn
+yabai -m config mouse_action1               move
+yabai -m config mouse_action2               resize
+
+yabai -m config window_topmost              off
+yabai -m config window_opacity              off
+yabai -m config window_shadow               float
+
+yabai -m config active_window_opacity       1.0
+yabai -m config normal_window_opacity       0.9
+yabai -m config split_ratio                 0.5
+yabai -m config auto_balance                off
+
+# ====== Border settings =======================
+
+yabai -m config window_border               off
+
+yabai -m config window_border_width         0
+yabai -m config active_window_border_color   0xffffa931
+
+yabai -m config normal_window_border_color   0xff505050
+yabai -m config insert_window_border_color   0xffd75f5f
+
+# ====== List of rules =========================
+
+yabai -m rule --add label=chrome app="^Google Chrome$" space=4
+
+yabai -m rule --add label=iTerm2 app="^iTerm$" space=1
+
+yabai -m signal --add event=space_changed action="type=\$(yabai -m query --spaces --space | jq .type) && [ \$type = '\"bsp\"' ] && yabai -m config window_border on"
+yabai -m signal --add event=space_changed action="type=\$(yabai -m query --spaces --space | jq .type) && [ \$type = '\"float\"' ] && yabai -m config window_border off"
