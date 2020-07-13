@@ -1,4 +1,13 @@
 
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	## for cross compile in macos
+	export HOSTCFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
+	export GNUBINS="$(find /usr/local/opt -type d -follow -name gnubin -print)";
+	for bindir in ${GNUBINS[@]}; do
+		export PATH=$bindir:$PATH;
+	done;
+fi
+
 if [[ "$SSH_CONNECTION" != "" && "$SCHSPA_SSHFS_DIR" != "" && "$SCHSPA_SSHFS_TARGET" != "" ]]; then
 	echo "mount sshfs on $SCHSPA_SSHFS_TARGET"
 	if [ "`ls -A ${SCHSPA_SSHFS_TARGET}`" = "" ]; then

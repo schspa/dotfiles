@@ -1,9 +1,14 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+DOTFILES_DIR=$(dirname `realpath ~/.zshrc`)
+
+if [ -r $DOTFILES_DIR ]; then
+	source $DOTFILES_DIR/shellrc
+fi
+
 [[ $TERM == "tramp" ]] && unsetopt zle && PS1='$ ' && return
 
-DOTFILES_DIR=$(dirname `realpath ~/.zshrc`)
 source $DOTFILES_DIR/antigen.zsh
 
 # Path to your oh-my-zsh installation.
@@ -157,7 +162,3 @@ vterm_prompt_end() {
     vterm_printf "51;A$(whoami)@$(hostname):$(pwd)";
 }
 PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
-
-if [ -r $DOTFILES_DIR ]; then
-	source $DOTFILES_DIR/shellrc
-fi
