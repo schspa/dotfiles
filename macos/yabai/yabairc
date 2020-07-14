@@ -48,11 +48,40 @@ yabai -m config active_window_border_color   0xffffa931
 yabai -m config normal_window_border_color   0xff505050
 yabai -m config insert_window_border_color   0xffd75f5f
 
+# ====== Confituration spaces ==================
+init_space() {
+    space_number=$1
+    space_name=$2
+    space_layout=$3
+    yabai -m space $space_name --balance
+    if [[ $? == 0 ]]
+    then
+       return 0
+    fi
+
+    if [[ $space_layout=="" ]]
+    then
+        space_layout=bsp
+    fi
+
+    yabai -m space $space_name --balance || yabai -m space $space_number --layout $space_layout || yabai -m space --create
+    yabai -m space $space_name --balance || yabai -m space $space_number --label $space_name
+}
+
+init_space 1 editor
+init_space 2 terminal
+init_space 3 browser1
+init_space 4 browser2
+init_space 5 docs
+init_space 6 chat float
+init_space 7 media
+init_space 8 remote1
+init_space 9 remote2
+init_space 10 vms
+
 # ====== List of rules =========================
 
-yabai -m rule --add label=chrome app="^Google Chrome$" space=4
-
-yabai -m rule --add label=iTerm2 app="^iTerm$" space=1
+yabai -m rule --add label=chrome app="^Google Chrome$" space=browser2
 
 yabai -m signal --add event=space_changed action="type=\$(yabai -m query --spaces --space | jq .type) && [ \$type = '\"bsp\"' ] && yabai -m config window_border on"
 yabai -m signal --add event=space_changed action="type=\$(yabai -m query --spaces --space | jq .type) && [ \$type = '\"float\"' ] && yabai -m config window_border off"
@@ -78,3 +107,5 @@ yabai -m rule --add label="Parallels Desktop" app="^Parallels Desktop$" manage=o
 yabai -m rule --add label="企业微信" app="^企业微信$" manage=off
 yabai -m rule --add label="微信" app="^微信$" manage=off
 yabai -m rule --add label="网易云音乐" app="^网易云音乐$" manage=off
+yabai -m rule --add label="MenuMeters" app="^MenuMeters$" manage=off
+yabai -m rule --add label="预览" app="^预览$" manage=off

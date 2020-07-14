@@ -5,10 +5,10 @@ alt - return : ~/.config/dotfiles/macos/script/open-iterm.sh
 
 
 # Navigation
-alt - j : yabai -m window --focus west
-alt - k : yabai -m window --focus south
-alt - i : yabai -m window --focus north
-alt - l : yabai -m window --focus east
+alt - j : ~/.config/dotfiles/macos/script/yabai-switch.sh west
+alt - k : ~/.config/dotfiles/macos/script/yabai-switch.sh south
+alt - i : ~/.config/dotfiles/macos/script/yabai-switch.sh north
+alt - l : ~/.config/dotfiles/macos/script/yabai-switch.sh east
 
 # Moving windows
 shift + alt - j : yabai -m window --warp west
@@ -20,12 +20,16 @@ shift + alt - l : yabai -m window --warp east
 shift + alt - m : yabai -m window --space last && yabai -m space --focus last
 shift + alt - b : yabai -m window --space prev && yabai -m space --focus prev
 shift + alt - n : yabai -m window --space next && yabai -m space --focus next
-shift + alt - 1 : yabai -m window --space 1 && yabai -m space --focus 1
-shift + alt - 2 : yabai -m window --space 2 && yabai -m space --focus 2
-shift + alt - 3 : yabai -m window --space 3 && yabai -m space --focus 3
-shift + alt - 4 : yabai -m window --space 4 && yabai -m space --focus 4
-shift + alt - 5 : yabai -m window --space 5 && yabai -m space --focus 5
-shift + alt - 6 : yabai -m window --space 6 && yabai -m space --focus 6
+shift + alt - 1 : yabai -m window --space editor && yabai -m space --focus edittor
+shift + alt - 2 : yabai -m window --space terminal && yabai -m space --focus terminal
+shift + alt - 3 : yabai -m window --space browser1 && yabai -m space --focus browser1
+shift + alt - 4 : yabai -m window --space browser2 && yabai -m space --focus browser2
+shift + alt - 5 : yabai -m window --space docs && yabai -m space --focus docs
+shift + alt - 6 : yabai -m window --space chat && yabai -m space --focus chat
+shift + alt - 7 : yabai -m window --space media && yabai -m space --focus media
+shift + alt - 8 : yabai -m window --space remote1 && yabai -m space --focus remote1
+shift + alt - 9 : yabai -m window --space remote2 && yabai -m space --focus remote2
+shift + alt - 0 : yabai -m window --space vms && yabai -m space --focus vms
 
 # Resize windows
 shift+ cmd - j : \
@@ -85,31 +89,31 @@ alt - e : yabai -m window --toggle split
 # cmd + alt - x : yabai -m space --focus recent
 # cmd + alt - z : yabai -m space --focus prev
 # cmd + alt - c : yabai -m space --focus next
-alt - 1 : yabai -m space --focus 1
-alt - 2 : yabai -m space --focus 2
-alt - 3 : yabai -m space --focus 3
-alt - 4 : yabai -m space --focus 4
-alt - 5 : yabai -m space --focus 5
-alt - 6 : yabai -m space --focus 6
-alt - 7 : yabai -m space --focus 7
-alt - 8 : yabai -m space --focus 8
-alt - 9 : yabai -m space --focus 9
-alt - 0 : yabai -m space --focus 10
+alt - 1 : yabai -m space --focus editor || yabai -m space --focus recent
+alt - 2 : yabai -m space --focus terminal || yabai -m space --focus recent
+alt - 3 : yabai -m space --focus browser1 || yabai -m space --focus recent
+alt - 4 : yabai -m space --focus browser2 || yabai -m space --focus recent
+alt - 5 : yabai -m space --focus docs || yabai -m space --focus recent
+alt - 6 : yabai -m space --focus chat || yabai -m space --focus recent
+alt - 7 : yabai -m space --focus media || yabai -m space --focus recent
+alt - 8 : yabai -m space --focus remote1 || yabai -m space --focus recent
+alt - 9 : yabai -m space --focus remote2 || yabai -m space --focus recent
+alt - 0 : yabai -m space --focus vms || yabai -m space --focus recent
 
 # create new space
 ctrl + alt - n : yabai -m space --create
 
 # send window to space
-ctrl + shift - 1 : yabai -m window --space 1
-ctrl + shift - 2 : yabai -m window --space 2
-ctrl + shift - 3 : yabai -m window --space 3
-ctrl + shift - 4 : yabai -m window --space 4
-ctrl + shift - 5 : yabai -m window --space 5
-ctrl + shift - 6 : yabai -m window --space 6
-ctrl + shift - 7 : yabai -m window --space 7
-ctrl + shift - 8 : yabai -m window --space 8
-ctrl + shift - 9 : yabai -m window --space 9
-ctrl + shift - 0 : yabai -m window --space 10
+ctrl + shift - 1 : yabai -m window --space editor
+ctrl + shift - 2 : yabai -m window --space terminal
+ctrl + shift - 3 : yabai -m window --space browser1
+ctrl + shift - 4 : yabai -m window --space browser2
+ctrl + shift - 5 : yabai -m window --space docs
+ctrl + shift - 6 : yabai -m window --space chat
+ctrl + shift - 7 : yabai -m window --space media
+ctrl + shift - 8 : yabai -m window --space remote1
+ctrl + shift - 9 : yabai -m window --space remote2
+ctrl + shift - 0 : yabai -m window --space vms
 
 alt + ctrl - f : yabai -m space --layout float && \
                  yabai -m config window_border off
@@ -117,4 +121,6 @@ alt + ctrl - b : yabai -m space --layout bsp && \
                  yabai -m config window_border on
 
 alt + shift - q : yabai -m window --close
+
+alt - p : yabai -m space --display recent
 
