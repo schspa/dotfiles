@@ -2,9 +2,8 @@
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	## for cross compile in macos
 	export HOSTCFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
-	export GNUBINS="$(find /usr/local/opt -type d -follow -name gnubin -print)";
-	for bindir in ${GNUBINS[@]}; do
-		export PATH=$bindir:$PATH;
+	for bindir in $(find /usr/local/opt -type d -follow -name gnubin -print); do
+		export PATH=${bindir}:$PATH;
 	done;
 fi
 
