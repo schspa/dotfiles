@@ -56,3 +56,25 @@ yabai -m rule --add label=iTerm2 app="^iTerm$" space=1
 
 yabai -m signal --add event=space_changed action="type=\$(yabai -m query --spaces --space | jq .type) && [ \$type = '\"bsp\"' ] && yabai -m config window_border on"
 yabai -m signal --add event=space_changed action="type=\$(yabai -m query --spaces --space | jq .type) && [ \$type = '\"float\"' ] && yabai -m config window_border off"
+
+# ====== List of rules =========================
+
+yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
+yabai -m rule --add label="System Preferences" app="^System Preferences$" manage=off
+yabai -m rule --add label="App Store" app="^App Store$" manage=off
+yabai -m rule --add label="Activity Monitor" app="^Activity Monitor$" manage=off
+yabai -m rule --add label="KeePassXC" app="^KeePassXC$" manage=off
+yabai -m rule --add label="Calculator" app="^Calculator$" manage=off
+yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
+yabai -m rule --add label="mpv" app="^mpv$" manage=off
+yabai -m rule --add label="The Unarchiver" app="^The Unarchiver$" manage=off
+yabai -m rule --add label="Transmission" app="^Transmission$" manage=off
+yabai -m rule --add label="VirtualBox" app="^VirtualBox$" manage=off
+
+# ====== 规则列表 ===============================
+yabai -m rule --add label="系统偏好设置" app="^系统偏好设置$" manage=off
+yabai -m rule --add label="Parallels Desktop" app="^Parallels Desktop$" manage=off
+yabai -m rule --add label="企业微信" app="^企业微信$" manage=off
+yabai -m rule --add label="微信" app="^微信$" manage=off
+yabai -m rule --add label="网易云音乐" app="^网易云音乐$" manage=off

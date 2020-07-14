@@ -1,5 +1,5 @@
 # opens iTerm2
-alt - return : open -a iTerm -n
+alt - return : ~/.config/dotfiles/macos/script/open-iterm.sh
 
 # Show system statistics
 
@@ -115,4 +115,6 @@ alt + ctrl - f : yabai -m space --layout float && \
                  yabai -m config window_border off
 alt + ctrl - b : yabai -m space --layout bsp && \
                  yabai -m config window_border on
+
+alt + shift - q : yabai -m window --close
 
