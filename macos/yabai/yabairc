@@ -2,11 +2,11 @@
 
 # ====== Variables =============================
 
-gaps_top="0"
-gaps_bottom="10"
-gaps_left="10"
-gaps_right="10"
-gaps_inner="10"
+gaps_top="26"
+gaps_bottom="0"
+gaps_left="0"
+gaps_right="0"
+gaps_inner="5"
 
 
 # ====== Tiling settings =======================
@@ -42,12 +42,6 @@ yabai -m config auto_balance                off
 
 yabai -m config window_border               off
 
-yabai -m config window_border_width         0
-yabai -m config active_window_border_color   0xffffa931
-
-yabai -m config normal_window_border_color   0xff505050
-yabai -m config insert_window_border_color   0xffd75f5f
-
 # ====== Confituration spaces ==================
 init_space() {
     space_number=$1
@@ -82,9 +76,6 @@ init_space 10 vms
 # ====== List of rules =========================
 
 yabai -m rule --add label=chrome app="^Google Chrome$" space=browser2
-
-yabai -m signal --add event=space_changed action="type=\$(yabai -m query --spaces --space | jq .type) && [ \$type = '\"bsp\"' ] && yabai -m config window_border on"
-yabai -m signal --add event=space_changed action="type=\$(yabai -m query --spaces --space | jq .type) && [ \$type = '\"float\"' ] && yabai -m config window_border off"
 
 # ====== List of rules =========================
 
