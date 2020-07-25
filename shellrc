@@ -3,9 +3,13 @@ export PATH=~/bin:$PATH
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	## for cross compile in macos
 	export HOSTCFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
-	for bindir in $(find /usr/local/opt -type d -follow -name gnubin -print); do
-		export PATH=${bindir}:$PATH
-	done;
+    for file in /usr/local/opt/*
+    do
+        if [ -d $file ] && [ -d $file/libexec/gnubin ]
+        then
+              export PATH=$file/libexec/gnubin:$PATH
+        fi
+    done
     ## homebrew mirror
     export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
 fi
