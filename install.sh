@@ -35,9 +35,13 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	mkdir -p $HOME/.config/qutebrowser/
 	ln -sf ${current_path}/qutebrowser/config/config.py $HOME/.config/qutebrowser/config.py
     # set up i3wm
+    rm -rf $HOME/.config/i3
 	ln -sf ${current_path}/config/i3 $HOME/.config/i3
+    rm -rf $HOME/.config/polybar
 	ln -sf ${current_path}/config/polybar $HOME/.config/polybar
+    rm -rf $HOME/.config/mpd
 	ln -sf ${current_path}/config/mpd $HOME/.config/mpd
+    rm -rf $HOME/.config/autorandr
 	ln -sf ${current_path}/config/autorandr $HOME/.config/autorandr
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	# ~/.qutebrowser/config.py
