@@ -1,83 +1,59 @@
 #!/usr/bin/env bash
 
+# dotfiles utility - https://gist.github.com/Jamesits/9bc4adfb1f299380c79e
+# Set $DOTFILES to where you want to put your dotfiles.
+# then run dotfiles-init someSoftware,
+# and it will move all files starting with `.someSoftware` to the correct location
+# then link them back,
+# Which will produce a directory structure like:
+#
+# $ tree -aL 2 ~/projects-private/dotfiles
+# ~/projects-private/dotfiles :
+# ├── dotfiles.sh
+# └── shell
+#     └── .zshrc
+#
+
 current_path=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 
-echo "Setup tmux"
-# setup tmux
-if [ ! -d "$HOME/.tmux/plugins" ]; then
-	echo "Clone tmux-plugins to $HOME/.tmux/plugins/tmp"
-	mkdir -p ~/.tmux/plugins/
-	git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+export DOTFILES=$current_path
+
+dotfiles-count() {
+    pushd >/dev/null 2>&1
+    cd $HOME
+    ls -ald .* | grep -v ^l | tee >(wc -l)
+    popd >/dev/null 2>&1
+}
+
+dotfiles-init() {
+    pushd >/dev/null 2>&1
+    cd $HOME
+    ls -ald .$1*;
+    mkdir -p $DOTFILES/$1;
+    mv .$1* $DOTFILES/$1;
+    stow --dir=$DOTFILES --target=$HOME -vv $1
+    popd >/dev/null 2>&1
+}
+
+dotfiles-rebuild() {
+    stow --dir=$DOTFILES --target=$HOME -vv $@
+}
+
+if [ $1 == "install" ]; then
+    dotfiles-rebuild i3wm
+    dotfiles-rebuild tmux
+    dotfiles-rebuild shell
+    dotfiles-rebuild ssh
+    if [[ "$OSTYPE" == "linux-gnu" ]]; then
+        dotfiles-rebuild qutebrowser
+        dotfiles-rebuild rime
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        mkdir -p $HOME/.qutebrowser/
+        ln -sf ${current_path}/qutebrowser/config/config.py $HOME/.qutebrowser/config.py
+        stow --dir=$DOTFILES/rime/.config/ibus --target=$HOME/Library/Rime -vv rime
+    fi
 fi
-ln -sf ${current_path}/tmux.conf $HOME/.tmux.conf
-
-echo "Setup on-my-zsh"
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-	echo "install on-my-zsh"
-	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
-
-ZSH_CUSTOM=~/.oh-my-zsh/custom
-
-if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
-	echo "install powerlevel10k theme"
-	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-fi
-
-ln -sf ${current_path}/.zshrc $HOME/.zshrc
-
-echo "setup ssh"
-ln -sf ${current_path}/ssh/config $HOME/.ssh/config
-
-# setup qutuebrowser
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-	# ~/.config/qutebrowser/config.py
-	mkdir -p $HOME/.config/qutebrowser/
-	ln -sf ${current_path}/qutebrowser/config/config.py $HOME/.config/qutebrowser/config.py
-    # set up i3wm
-    rm -rf $HOME/.config/i3
-	ln -sf ${current_path}/config/i3 $HOME/.config/i3
-    rm -rf $HOME/.config/polybar
-	ln -sf ${current_path}/config/polybar $HOME/.config/polybar
-    rm -rf $HOME/.config/mpd
-	ln -sf ${current_path}/config/mpd $HOME/.config/mpd
-    rm -rf $HOME/.config/autorandr
-	ln -sf ${current_path}/config/autorandr $HOME/.config/autorandr
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-	# ~/.qutebrowser/config.py
-	mkdir -p $HOME/.qutebrowser/
-	ln -sf ${current_path}/qutebrowser/config/config.py $HOME/.qutebrowser/config.py
-elif [[ "$OSTYPE" == "msys" || "OSTYPE" == "cygwin" || "OSTYPE" == "win32" ]]; then
-	# %APPDATA%/qutebrowser/config/config.py
-    # I'm not sure this can happen.
-	# Not test on windows yet
-else:
-    # Unknown.
-fi
-
-echo "setup rime"
-if [[ "$OSTYPE" == "darwin"* ]]; then
-	echo "macos"
-	RIME_PATH="${HOME}/Library/Rime"
-	ln -sf ${current_path}/rime/squirrel.custom.yaml ~/Library/Rime/squirrel.custom.yaml
-elif [[ "$OSTYPE" == "linux-gnu" ]]; then
-	echo "linux"
-	RIME_PATH="$HOME/.config/fcitx/rime"
-fi
-
-if [[ $RIME_PATH != "" ]]; then
-	echo "Symlink ${current_path} to $RIME_PATH"
-	ln -sf ${current_path}/rime/luna_pinyin_simp.custom.yaml $RIME_PATH/luna_pinyin_simp.custom.yaml
-	ln -sf ${current_path}/rime/default.custom.yaml $RIME_PATH/default.custom.yaml
-
-	ln -sf ${current_path}/rime/extend_dictionaries/luna_pinyin.hanyu.dict.yaml	$RIME_PATH/luna_pinyin.hanyu.dict.yaml
-	ln -sf ${current_path}/rime/extend_dictionaries/luna_pinyin.extended.dict.yaml $RIME_PATH/luna_pinyin.extended.dict.yaml
-	ln -sf ${current_path}/rime/extend_dictionaries/luna_pinyin.poetry.dict.yaml $RIME_PATH/luna_pinyin.poetry.dict.yaml
-	ln -sf ${current_path}/rime/extend_dictionaries/luna_pinyin.cn_en.dict.yaml $RIME_PATH/luna_pinyin.cn_en.dict.yaml
-	ln -sf ${current_path}/rime/extend_dictionaries/luna_pinyin.sogou.dict.yaml $RIME_PATH/luna_pinyin.sogou.dict.yaml
-fi
-
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    source ${current_path}/macos/install.sh
+    source ${current_path}/macos/install.sh $@
 fi

@@ -3,12 +3,12 @@ DOTFILES_DIR=$(dirname `realpath ~/.zshrc`)
 export PATH=$HOME/bin:$DOTFILES_DIR/bin:/usr/local/bin:$PATH
 
 if [ -r $DOTFILES_DIR ]; then
-	source $DOTFILES_DIR/shellrc
+	source $DOTFILES_DIR/.shellrc
 fi
 
 [[ $TERM == "tramp" ]] && unsetopt zle && PS1='$ ' && return
 
-source $DOTFILES_DIR/antigen.zsh
+source $DOTFILES_DIR/.antigen.zsh
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
