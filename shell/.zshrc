@@ -16,6 +16,9 @@ source /usr/share/zsh/share/antigen.zsh
 antigen use oh-my-zsh
 
 plugins=(
+    wd
+    z
+    sudo
 	docker
     git
     emacs
@@ -23,6 +26,7 @@ plugins=(
     command-not-found
     # Syntax highlighting bundle.
     zsh-users/zsh-syntax-highlighting
+    zsh-users/zsh-autosuggestions
 )
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
