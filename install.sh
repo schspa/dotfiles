@@ -39,7 +39,7 @@ dotfiles-rebuild() {
     stow --dir=$DOTFILES --target=$HOME -vv $@
 }
 
-if [ $1 == "install" ]; then
+if [[ "$1"x == "install"x ]]; then
     dotfiles-rebuild i3wm
     dotfiles-rebuild tmux
     dotfiles-rebuild shell
