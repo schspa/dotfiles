@@ -40,6 +40,7 @@ dotfiles-rebuild() {
 }
 
 if [[ "$1"x == "install"x ]]; then
+    dotfiles-rebuild stow
     dotfiles-rebuild i3wm
     dotfiles-rebuild tmux
     dotfiles-rebuild shell
