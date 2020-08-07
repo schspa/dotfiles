@@ -52,6 +52,7 @@ if [[ "$1"x == "install"x ]]; then
         ln -sf ${current_path}/qutebrowser/config/config.py $HOME/.qutebrowser/config.py
         stow --dir=$DOTFILES/rime/.config/ibus --target=$HOME/Library/Rime -vv rime
     fi
+    dotfiles-rebuild email
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then

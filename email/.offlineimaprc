@@ -1,0 +1,24 @@
+[general]
+pythonfile = ~/.offlineimap.py
+accounts = Work
+
+[Account Work]
+localrepository = Local
+remoterepository = Remote
+utf8foldernames = no
+
+[Repository Local]
+type = Maildir
+localfolders = ~/Maildir
+
+[Repository Remote]
+type = IMAP
+remotehosteval = get_host('Remote')
+remoteusereval = get_username('Remote')
+remotepasseval = get_password('Remote')
+
+ssl = true
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+#
+# Folders to skip during sync.
+folderfilter = lambda foldername: foldername not in ['Deleted Items', 'Contacts', 'Calendar', 'Trash', 'MyFolderOfReallyOldMail']
