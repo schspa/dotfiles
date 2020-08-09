@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+volumeicon &
+nm-applet &
+export $(gnome-keyring-daemon --start)

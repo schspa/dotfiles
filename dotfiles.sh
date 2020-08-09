@@ -41,13 +41,14 @@ dotfiles-rebuild() {
 
 if [[ "$1"x == "install"x ]]; then
     dotfiles-rebuild stow
-    dotfiles-rebuild i3wm
     dotfiles-rebuild tmux
     dotfiles-rebuild shell
     dotfiles-rebuild ssh
     if [[ "$OSTYPE" == "linux-gnu" ]]; then
         dotfiles-rebuild qutebrowser
         dotfiles-rebuild rime
+        dotfiles-rebuild i3wm
+        dotfiles-rebuild dwm
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         mkdir -p $HOME/.qutebrowser/
         ln -sf ${current_path}/qutebrowser/config/config.py $HOME/.qutebrowser/config.py
