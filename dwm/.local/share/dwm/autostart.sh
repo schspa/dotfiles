@@ -1,8 +1,6 @@
 #!/usr/bin/env sh
 
-dwmblocks &
+killall dwmblocks && dwmblocks &
 blueman-applet &
 nm-applet &
-
-date > ~/.dwm-autostart-run-log
 
