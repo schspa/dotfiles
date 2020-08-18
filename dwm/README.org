@@ -28,3 +28,7 @@
    make
    sudo make install
    #+end_src
+** misc apps
+   #+begin_src bash
+   sudo pacman -S polkit-gnome blueman network-manager-applet
+   #+end_src
