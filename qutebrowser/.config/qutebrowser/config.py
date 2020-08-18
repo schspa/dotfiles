@@ -119,3 +119,8 @@ c.bindings.commands['caret'] = {
 	# escape hatch
 	'<ctrl-g>': 'leave-mode',
 }
+
+for key, binds in c.bindings.commands.items():
+	for short_cut, command in binds.copy().items():
+		if 'meta' in short_cut:
+			binds[short_cut.replace('meta', 'alt')] = command
