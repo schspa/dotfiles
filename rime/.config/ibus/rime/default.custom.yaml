@@ -1,0 +1,11 @@
+patch:
+  schema_list:
+    - schema: luna_pinyin_simp
+
+  key_binder/bindings:                      # 以方括号换页
+    - when: paging
+      accept: bracketleft
+      send: Page_Up
+    - when: has_menu
+      accept: bracketright
+      send: Page_Down

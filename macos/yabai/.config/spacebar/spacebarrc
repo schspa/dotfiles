@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+# Spacebar setting
+# spacebar -m config status_bar                   on
+spacebar -m config text_font         "Helvetica Neue:Bold:12.0"
+spacebar -m config icon_font         "Font Awesome 5 Free:Solid:12.0"
+spacebar -m config background_color  0xf0202020
+spacebar -m config foreground_color  0xf0a8a8a8
+spacebar -m config space_icon_strip          
+
+spacebar -m config power_icon_strip   
+spacebar -m config space_icon        
+spacebar -m config clock_icon        
+spacebar -m config clock_format      "%A %d %B %R"
+
+## Local Variables:
+## eval: (set-fontset-font "fontset-default"
+##                  'unicode-bmp
+##                  '("Font Awesome 5 Free" . "unicode-bmp"))
+## End:

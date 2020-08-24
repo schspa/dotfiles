@@ -1,0 +1,34 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     my DWM configuration
+#+AUTHOR:    schspa
+#+EMAIL:     schspa@gmail.com
+#+DATE:     <2020-08-10 01:06:34>
+#+DESCRIPTION: my DWM configuration
+#+KEYWORDS: 
+#+TAGS: 
+#+FILETAGS: 
+#+OPTIONS:   H:3 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+LATEX_HEADER: \usepackage{fontspec}
+#+LATEX_HEADER: \setmainfont{PingFang SC}
+
+* install needed software
+** dwm-run
+  #+begin_src bash
+  # add boot entry for display managers
+  git clone https://github.com/nbirnel/dwm-from-gdm.git
+  cd dwm-from-gdm
+  sudo make install
+  #+end_src
+** dwm
+   #+begin_src bash
+   git clone https://github.com/schspa/dwm-flexipatch.git -b mine
+   cd dwm-flexipatch
+   make
+   sudo make install
+   #+end_src
+** misc apps
+   #+begin_src bash
+   sudo pacman -S polkit-gnome blueman network-manager-applet
+   #+end_src

@@ -5,22 +5,37 @@
 1. Install dependency
    - Archlinux/Manjaro
 	 #+BEGIN_SRC bash
-	 sudo pacman -S git tmux
+	 sudo pacman -S git tmux ttf-font-awesome arandr autorandr i3-gaps xfce4-terminal i3lock-fancy blueman chromium rofi feh mate-power-manager gnome-keyring network-manager-applet ibus seahorse picom gnome-settings-daemon syncthing stow
+     yay ttf-font-awesome
+     # for offlineimap
+     sudo -H python2 -m pip install keyring
 	 #+END_SRC
    - Ubuntu
 	 #+BEGIN_SRC bash
-	 sudo apt-get install git tmux
+	 sudo apt-get install git tmux stow
 	 #+END_SRC
    - MacOS
      #+begin_src bash
      brew install autoconf bash binutils coreutils diffutils ed findutils flex gawk \
      gnu-indent gnu-sed gnu-tar gnu-which gpatch grep gzip less m4 make nano \
-     screen watch wdiff wget gcc bison libelf openssl
+     screen watch wdiff wget gcc bison libelf openssl stow
      #+end_src
 
 2. Install Configurations
+   本配置使用stow来管理，stow的介绍以及详细用法请参考下面的博客：
+   [[https://blog.swineson.me/use-gnu-stow-to-manage-dot-started-config-files-in-your-home-directory/][使用GNU stow统一管理用户目录下那些隐藏的配置文件]]
+
    #+BEGIN_SRC bash
    git clone https://github.com/schspa/dotfiles.git ~/dotfiles
    cd ~/dotfiles
-   ./install.sh
+   ./install.sh install
    #+END_SRC
+* 特性
+** offlineimap
+   offlineimap用来作为邮件客户段，通过emacs的mu4e插件来收发邮件
+*** 用户名，密码
+    offlineimap的配制文件中可以通过python脚本来设置参数，基于此，将个人的敏感信息放到系统keyring中
+    在我的使用中，将用户名和密码存放在gnome-keyring中。
+    #+BEGIN_SRC bash
+    python2 ~/.offlineimap.py Remote xxx.com xxx
+    #+END_SRC

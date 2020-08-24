@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+notify-send "Connecting to cf591"
+i3-msg '[workspace="^(1|4|6)"] move workspace to output DP-1;'

@@ -63,3 +63,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+# rime
+rime/.config/ibus/rime

@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-notify-send "Disconnect all monitors"
-
-xrandr --dpi 92
-xrandr --output eDP-1 --primary
-i3-msg '[workspace="^[0-9]"] move workspace to output eDP-1;'
