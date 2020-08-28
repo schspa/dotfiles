@@ -10,7 +10,11 @@ export PATH=$HOME/bin:$DOTFILES_DIR/bin:/usr/local/bin:$PATH
 
 [[ $TERM == "tramp" ]] && unsetopt zle && PS1='$ ' && return
 
+if [ -e /usr/local/share/antigen/antigen.zsh ]; then
+source /usr/local/share/antigen/antigen.zsh
+elif [ -e /usr/share/zsh/share/antigen.zsh ]; then
 source /usr/share/zsh/share/antigen.zsh
+fi
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
