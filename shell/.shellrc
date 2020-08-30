@@ -1,13 +1,11 @@
+if [[ "$MY_ENV_EXPORTED"x == "true"x ]]; then
+   return 0
+fi
+
 export PATH=~/bin:$PATH
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	## for cross compile in macos
-    gcc () {
-        gcc-9 -I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib "$@"
-    }
-    if [ x"$BASH_ENV" = x"" ]; then
-       export BASH_ENV=$HOME/.bashrc
-    fi
 
     for file in /usr/local/opt/*
     do
@@ -30,3 +28,4 @@ if [[ "$SSH_CONNECTION" != "" && "$SCHSPA_SSHFS_DIR" != "" && "$SCHSPA_SSHFS_TAR
 	fi
 fi
 
+export MY_ENV_EXPORTED=true
