@@ -2,7 +2,7 @@ if [[ "$MY_ENV_EXPORTED"x == "true"x ]]; then
    return 0
 fi
 
-export PATH=~/bin:$PATH
+export PATH=~/bin:~/node_modules/.bin:$PATH
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	## for cross compile in macos
