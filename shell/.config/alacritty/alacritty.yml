@@ -433,6 +433,10 @@ shell:
     - -l
 #    - -c
 #    - "tmux"
+
+env:
+  LC_ALL: "en_US.UTF-8"
+
 #debug:
   # Display the time it takes to redraw each frame.
   #render_timer: false
