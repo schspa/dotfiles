@@ -5,7 +5,8 @@ fi
 export PATH=~/bin:~/node_modules/.bin:$PATH
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-	## for cross compile in macos
+    export PATH=/Library/TeX/texbin:$PATH
+    ## for cross compile in macos
 
     for file in /usr/local/opt/*
     do
