@@ -76,6 +76,9 @@ init_space 10 vms
 # ====== List of rules =========================
 
 yabai -m rule --add label=chrome app="^Google Chrome$" space=browser2
+yabai -m rule --add label="Alacritty" app="^Alacritty$" space=terminal
+yabai -m rule --add label="iTerm2" app="^iTerm2$" space=terminal
+yabai -m rule --add label="Emacs" app="^Emacs$"space=editor
 
 # ====== List of rules =========================
 
