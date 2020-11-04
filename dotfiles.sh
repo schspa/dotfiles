@@ -39,11 +39,25 @@ dotfiles-rebuild() {
     stow --dir=$DOTFILES --target=$HOME -vv $@
 }
 
+function version { echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }'; }
+
 if [[ "$1"x == "install"x ]]; then
     dotfiles-rebuild stow
     dotfiles-rebuild tmux
     dotfiles-rebuild shell
-    dotfiles-rebuild ssh
+    if [[ "$OSTYPE" == "linux-gnu" ]]; then
+        SSH_VERSION=$(ssh -V 2>&1 | grep -oP '(?<=OpenSSH_)[0-9.]+')
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        SSH_VERSION=$(ssh -V 2>&1 | ggrep -oP '(?<=OpenSSH_)[0-9.]+')
+    fi
+
+    if [ $(version $SSH_VERSION) -ge $(version "7.3") ]; then
+        echo "ssh support Include keyword"
+        dotfiles-rebuild ssh
+    else
+        echo "Don't support Include Keyword, skip ssh config"
+    fi
+
     if [[ "$OSTYPE" == "linux-gnu" ]]; then
         dotfiles-rebuild qutebrowser
         dotfiles-rebuild rime
