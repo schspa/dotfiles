@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 
 # Default settings
@@ -83,7 +83,7 @@ main() {
     check_depencys
 
     if [ -d "$DOTFILES" ]; then
-        echo "${YELLOW}The $DOTFILES folder already exists ($ZSH).${RESET}"
+        echo "${YELLOW}The $DOTFILES folder already exists .${RESET}"
         echo "You'll need to remove it if you want to reinstall."
         exit 1
     fi

@@ -25,11 +25,11 @@
    本配置使用stow来管理，stow的介绍以及详细用法请参考下面的博客：
    [[https://blog.swineson.me/use-gnu-stow-to-manage-dot-started-config-files-in-your-home-directory/][使用GNU stow统一管理用户目录下那些隐藏的配置文件]]
 
-   #+BEGIN_SRC bash
-   git clone https://github.com/schspa/dotfiles.git ~/dotfiles
-   cd ~/dotfiles
-   ./install.sh install
-   #+END_SRC
+   | Method | Command                                                                                       |
+   | curl   | ~bash -c "$(curl -fsSL https://raw.githubusercontent.com/schspa/dotfiles/master/install.sh)"~ |
+   | wget   | ~bash -c "$(wget -O-  https://raw.githubusercontent.com/schspa/dotfiles/master/install.sh)"~  |
+   | fetch  | ~bash -c "$(fetch -o - https://raw.githubusercontent.com/schspa/dotfiles/master/install.sh)"~ |
+
 * 特性
 ** offlineimap
    offlineimap用来作为邮件客户段，通过emacs的mu4e插件来收发邮件
