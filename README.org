@@ -1,8 +1,15 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  en
+#+TITLE:     Schspa's dotfiles
+#+AUTHOR:    Schspa
+#+EMAIL:     schspa@gmail.com
+#+PROPERTY: header-args :exports code
+
 * dotfiles
   My dot config files
 
 * Install
-1. Install dependency
+** Install dependency
    - Archlinux/Manjaro
 	 #+BEGIN_SRC bash
 	 sudo pacman -S git tmux ttf-font-awesome arandr autorandr i3-gaps xfce4-terminal i3lock-fancy blueman chromium rofi feh mate-power-manager gnome-keyring network-manager-applet ibus seahorse picom gnome-settings-daemon syncthing stow
@@ -21,14 +28,29 @@
      screen watch wdiff wget gcc bison libelf openssl stow
      #+end_src
 
-2. Install Configurations
+** Install Configurations
    本配置使用stow来管理，stow的介绍以及详细用法请参考下面的博客：
    [[https://blog.swineson.me/use-gnu-stow-to-manage-dot-started-config-files-in-your-home-directory/][使用GNU stow统一管理用户目录下那些隐藏的配置文件]]
+*** install via github repository
+   - *wget* ::
+     #+begin_src bash
+       bash -c "$(wget -O-  https://raw.githubusercontent.com/schspa/dotfiles/master/install.sh)"
+     #+end_src
 
-   | Method | Command                                                                                       |
-   | curl   | ~bash -c "$(curl -fsSL https://raw.githubusercontent.com/schspa/dotfiles/master/install.sh)"~ |
-   | wget   | ~bash -c "$(wget -O-  https://raw.githubusercontent.com/schspa/dotfiles/master/install.sh)"~  |
-   | fetch  | ~bash -c "$(fetch -o - https://raw.githubusercontent.com/schspa/dotfiles/master/install.sh)"~ |
+   - *curl* ::
+     #+begin_src bash
+       bash -c "$(curl -fsSL https://raw.githubusercontent.com/schspa/dotfiles/master/install.sh)"
+     #+end_src
+
+*** install via gitee respository
+     #+begin_src bash
+       REMOTE=https://gitee.com/schspa/dotfiles.git bash -c "$(wget -O- https://gitee.com/schspa/dotfiles/raw/master/install.sh)"
+     #+end_src
+
+   - *curl* ::
+     #+begin_src bash
+       REMOTE=https://gitee.com/schspa/dotfiles.git bash -c "$(curl -fsSl https://gitee.com/schspa/dotfiles/raw/master/install.sh)"
+     #+end_src
 
 * 特性
 ** offlineimap

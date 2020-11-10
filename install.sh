@@ -72,7 +72,7 @@ setup_dotfiles() {
         exit 1
     }
 
-    pushd ~/dotfiles && ./dotfiles.sh install && popd
+    cd ~/.config/dotfiles && ./dotfiles.sh install
 
     echo
 }
