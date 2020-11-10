@@ -8,12 +8,18 @@ DOTFILES_DIR=$(dirname $DOTFILES_DIR)
 
 export PATH=$HOME/bin:$DOTFILES_DIR/bin:/usr/local/bin:$PATH
 
+eval "$(direnv hook zsh)"
+
 [[ $TERM == "tramp" ]] && unsetopt zle && PS1='$ ' && return
 
-if [ -e /usr/local/share/antigen/antigen.zsh ]; then
-source /usr/local/share/antigen/antigen.zsh
+if [ -e ~/.config/antigen.zsh ]; then
+    source ~/.config/antigen.zsh
+elif [ -e /usr/local/share/antigen/antigen.zsh ]; then
+    source /usr/local/share/antigen/antigen.zsh
 elif [ -e /usr/share/zsh/share/antigen.zsh ]; then
-source /usr/share/zsh/share/antigen.zsh
+    source /usr/share/zsh/share/antigen.zsh
+elif [ -e /usr/share/zsh-antigen/antigen.zsh ]; then
+    source /usr/share/zsh-antigen/antigen.zsh
 fi
 
 # Load the oh-my-zsh's library.
