@@ -37,6 +37,10 @@ dotfiles-init() {
 
 dotfiles-rebuild() {
     stow --dir=$DOTFILES --target=$HOME -vv $@
+    if [ $? != 0 ]; then
+        echo "$@ install failed"
+        exit 1
+    fi
 }
 
 function version { echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }'; }
