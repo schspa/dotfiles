@@ -1,4 +1,4 @@
-if [[ "$MY_ENV_EXPORTED"x == "true"x ]]; then
+if [[ "${TMUX}_${MY_ENV_EXPORTED}"x == "true"x ]]; then
    return 0
 fi
 
@@ -29,4 +29,4 @@ if [[ "$SSH_CONNECTION" != "" && "$SCHSPA_SSHFS_DIR" != "" && "$SCHSPA_SSHFS_TAR
 	fi
 fi
 
-export MY_ENV_EXPORTED=true
+export _MY_ENV_EXPORTED=true
