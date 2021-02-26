@@ -21,29 +21,28 @@
 
 import keyring
 
-def get_host(repo):
-    return keyring.get_password("offlineimap_{:s}".format(repo), 'host')
+def get_mail_conf(repo):
+    keys=repo.split('/')
+    return keyring.get_password(keys[0], keys[1])
 
-def get_username(repo):
-    return keyring.get_password("offlineimap_{:s}".format(repo), 'username')
+FOLDER_MAP = {
+    'inbox':   'INBOX',
+    "sent":    "[Gmail]/Sent Mail",
+    "drafts":  "[Gmail]/Drafts",
+    "trash":   "[Gmail]/Trash",
+    "archive": "[Gmail]/All Mail"
+}
 
-def get_password(repo):
-    return keyring.get_password("offlineimap_{:s}".format(repo), 'password')
+INVERSE_FOLDER_MAP = {v:k for k,v in FOLDER_MAP.items()}
 
-if __name__ == "__main__":
-    import sys
-    import os
-    import getpass
-    if len(sys.argv) != 4:
-        print "Usage: %s <repository> <host> <username>" \
-            % (os.path.basename(sys.argv[0]))
-        sys.exit(0)
-    repo, host, username = sys.argv[1:]
-    password = getpass.getpass("Enter password for user '%s': " % username)
-    password_confirmation = getpass.getpass("Confirm password: ")
-    if password != password_confirmation:
-        print "Error: password confirmation does not match"
-        sys.exit(1)
-    keyring.set_password("offlineimap_{:s}".format(repo), 'host', host)
-    keyring.set_password("offlineimap_{:s}".format(repo), 'username', username)
-    keyring.set_password("offlineimap_{:s}".format(repo), 'password', password)
+INCLUDED_FOLDERS = ["INBOX"] + FOLDER_MAP.values()
+
+def local_folder_to_gmail_folder(folder):
+    return FOLDER_MAP.get(folder, folder)
+
+def gmail_folder_to_local_folder(folder):
+    return INVERSE_FOLDER_MAP.get(folder, folder)
+
+def should_include_folder(folder):
+    return folder in INCLUDED_FOLDERS
+

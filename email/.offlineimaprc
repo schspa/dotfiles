@@ -1,24 +1,54 @@
 [general]
 pythonfile = ~/.offlineimap.py
-accounts = Work
+accounts = gmail,work
+socktimeout = 10
 
-[Account Work]
-localrepository = Local
-remoterepository = Remote
+[Account work]
+localrepository = local-work
+remoterepository = remote-work
 utf8foldernames = no
 
-[Repository Local]
+[Repository local-work]
 type = Maildir
-localfolders = ~/Maildir
+localfolders = ~/Maildir/work/
 
-[Repository Remote]
+[Repository remote-work]
 type = IMAP
-remotehosteval = get_host('Remote')
-remoteusereval = get_username('Remote')
-remotepasseval = get_password('Remote')
-
-ssl = true
+remotehosteval = get_mail_conf('work_mail/domain')
+remoteusereval = get_mail_conf('work_mail/username')
+remotepasseval = get_mail_conf('work_mail/password')
+ssl = no
+ssl_version = tls1_2
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 #
 # Folders to skip during sync.
-folderfilter = lambda foldername: foldername not in ['Deleted Items', 'Contacts', 'Calendar', 'Trash', 'MyFolderOfReallyOldMail']
+folderfilter = lambda foldername: foldername not in ['Deleted Items', 'Contacts', 'Calendar', 'Trash', 'INBOX/cr' ,'INBOX/wiki', 'INBOX/jekins']
+
+[Account gmail]
+localrepository = local-gmail
+remoterepository = remote-gmail
+proxy = SOCKS5:127.0.0.1:1080
+
+[Repository local-gmail]
+type = Maildir
+localfolders = ~/Maildir/gmail/
+nametrans = local_folder_to_gmail_folder
+
+[Repository remote-gmail]
+type = Gmail
+holdconnectionopen = yes
+keepalive = 60
+maxconnections = 3
+realdelete = no
+remoteuser = schspa@gmail.com
+auth_mechanisms = XOAUTH2
+oauth2_request_url = https://accounts.google.com/o/oauth2/token
+oauth2_client_id_eval = get_mail_conf('gmail/client_id')
+oauth2_client_secret_eval = get_mail_conf('gmail/client_secret')
+oauth2_refresh_token_eval = get_mail_conf('gmail/refresh_token')
+nametrans = gmail_folder_to_local_folder
+folderfilter = should_include_folder
+ssl_version = tls1_2
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+
