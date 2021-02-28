@@ -14,9 +14,9 @@ localfolders = ~/Maildir/work/
 
 [Repository remote-work]
 type = IMAP
-remotehosteval = get_mail_conf('work_mail/domain')
-remoteusereval = get_mail_conf('work_mail/username')
-remotepasseval = get_mail_conf('work_mail/password')
+remotehosteval = get_mail_conf('work/host')
+remoteusereval = get_mail_conf('work/username')
+remotepasseval = get_mail_conf('work/password')
 ssl = no
 ssl_version = tls1_2
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt

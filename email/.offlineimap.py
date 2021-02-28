@@ -20,10 +20,13 @@
 #
 
 import keyring
+import json
 
 def get_mail_conf(repo):
     keys=repo.split('/')
-    return keyring.get_password(keys[0], keys[1])
+    jsonstring = keyring.get_password("email-conf", keys[0])
+    mail_conf = json.loads(jsonstring)
+    return mail_conf[":" + keys[1]]
 
 FOLDER_MAP = {
     'inbox':   'INBOX',
