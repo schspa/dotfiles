@@ -22,7 +22,7 @@ ssl_version = tls1_2
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 #
 # Folders to skip during sync.
-folderfilter = lambda foldername: foldername not in ['Deleted Items', 'Contacts', 'Calendar', 'Trash', 'INBOX/cr' ,'INBOX/wiki', 'INBOX/jekins']
+folderfilter = lambda foldername: foldername not in ['Deleted Items', 'Contacts', 'Calendar', 'Trash', 'INBOX/cr' ,'INBOX/wiki', 'INBOX/jekins', 'INBOX/ci', 'INBOX/ci/arm', 'INBOX/kms']
 
 [Account gmail]
 localrepository = local-gmail
@@ -50,5 +50,4 @@ nametrans = gmail_folder_to_local_folder
 folderfilter = should_include_folder
 ssl_version = tls1_2
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
-
 
