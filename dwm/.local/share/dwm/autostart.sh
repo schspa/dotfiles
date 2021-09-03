@@ -3,7 +3,7 @@
 killall dwmblocks; dwmblocks &
 killall /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-killall volumeicon; volumeicon &
+killall pa-applet; pa-applet &
 xss-lock -- i3lock-fancy &
 blueman-applet &
 nm-applet &
