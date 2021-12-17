@@ -39,7 +39,6 @@ dotfiles-rebuild() {
     stow --dir=$DOTFILES --target=$HOME -vv $@
     if [ $? != 0 ]; then
         echo "$@ install failed"
-        exit 1
     fi
 }
 
@@ -49,6 +48,7 @@ if [[ "$1"x == "install"x ]]; then
     dotfiles-rebuild stow
     dotfiles-rebuild tmux
     dotfiles-rebuild shell
+    dotfiles-rebuild clangd
     if [[ "$OSTYPE" == "linux-gnu" ]]; then
         SSH_VERSION=$(ssh -V 2>&1 | grep -oP '(?<=OpenSSH_)[0-9.]+')
     elif [[ "$OSTYPE" == "darwin"* ]]; then
