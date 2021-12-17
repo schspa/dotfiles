@@ -2,6 +2,7 @@
 
 killall dwmstatus 2>/dev/null; dwmstatus &
 killall /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 2>/dev/null
+killall /usr/bin/mate-power-manager  2>/dev/null; /usr/bin/mate-power-manager &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 killall pa-applet 2>/dev/null; pa-applet &
 xss-lock -- i3lock-fancy &
