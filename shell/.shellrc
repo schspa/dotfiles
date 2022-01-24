@@ -2,7 +2,15 @@ if [[ "${TMUX}_${MY_ENV_EXPORTED}"x == "true"x ]]; then
    return 0
 fi
 
+if [ -d $HOME/go/bin ]; then
+   export PATH=$HOME/go/bin:$PATH
+fi
+
 export PATH=~/bin:~/node_modules/.bin:$PATH
+
+if [ -d $HOME/usr/local/opt/llvm/bin ]; then
+    export PATH="/usr/local/opt/llvm/bin:$PATH"
+fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     export PATH=/Library/TeX/texbin:$PATH
