@@ -18,7 +18,6 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-
 import keyring
 import json
 
@@ -51,8 +50,16 @@ def should_include_folder(folder):
     return folder in INCLUDED_FOLDERS
 
 if __name__ == '__main__':
-    print(local_folder_to_gmail_folder("archive"))
-    print(gmail_folder_to_local_folder("[Gmail]/Sent Mail"))
-    get_mail_conf('gmail/client_id')
-    get_mail_conf('gmail/client_secret')
-    get_mail_conf('gmail/refresh_token')
+    import click
+    @click.command()
+    @click.option('--verbose', is_flag=True)
+    def cli(verbose):
+        """Print config"""
+
+        print(local_folder_to_gmail_folder("archive"))
+        print(gmail_folder_to_local_folder("[Gmail]/Sent Mail"))
+        get_mail_conf('gmail/client_id')
+        get_mail_conf('gmail/client_secret')
+        get_mail_conf('gmail/refresh_token')
+
+    cli()
