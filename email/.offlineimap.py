@@ -24,21 +24,35 @@ import json
 def get_mail_conf(repo):
     keys=repo.split('/')
     jsonstring = keyring.get_password("email-conf", keys[0])
+    if jsonstring is None:
+        return None
     mail_conf = json.loads(jsonstring)
     return mail_conf[":" + keys[1]]
 
+def set_mail_conf(repo, value):
+    keys=repo.split('/')
+    jsonstring = keyring.get_password("email-conf", keys[0])
+    mail_conf = None
+    try:
+        mail_conf = json.loads(jsonstring)
+    except TypeError:
+        mail_conf = {}
+    mail_conf[":" + keys[1]] = value
+    keyring.set_password("email-conf", keys[0], json.dumps(mail_conf))
+
+
 FOLDER_MAP = {
     'inbox':   'INBOX',
-    "sent":    "[Gmail]/Sent Mail",
-    "drafts":  "[Gmail]/Drafts",
-    "trash":   "[Gmail]/Trash",
-    "archive": "[Gmail]/All Mail",
+    "sent":    "[Gmail]/已发邮件",
+    "drafts":  "[Gmail]/垃圾邮件",
+    "trash":   "[Gmail]/已删除邮件",
+    "archive": "[Gmail]/所有邮件",
     "mail-list/mine": "mail-list/mine",
 }
 
 INVERSE_FOLDER_MAP = {v: k for k, v in FOLDER_MAP.items()}
 
-INCLUDED_FOLDERS = ["INBOX"] + list(FOLDER_MAP.values())
+INCLUDED_FOLDERS = ["mail-list", "mail-list/mine" "已发送邮件"] + list(FOLDER_MAP.values())
 
 def local_folder_to_gmail_folder(folder):
     return FOLDER_MAP.get(folder, folder)
@@ -53,12 +67,34 @@ if __name__ == '__main__':
     import click
     @click.command()
     @click.option('--verbose', is_flag=True)
-    def cli(verbose):
+    @click.option('-r', '--remote', default=None)
+    def cli(verbose, remote):
         """Print config"""
 
         print(local_folder_to_gmail_folder("archive"))
         print(gmail_folder_to_local_folder("[Gmail]/Sent Mail"))
-        get_mail_conf('gmail/client_id')
+
+        if remote != "gmail":
+            username = getpass.getuser()
+
+            if password is None:
+                password = getpass.getpass()
+            elif password == "-":
+                password = sys.stdin.read().strip()
+                pass
+
+            set_mail_conf('work/host', remote)
+            set_mail_conf('work/username', username)
+            set_mail_conf('work/password', password)
+            print(get_mail_conf('work/host'))
+            print(get_mail_conf('work/username'))
+            print(get_mail_conf('work/password'))
+            pass
+
+        set_mail_conf('gmail/client_id', '')
+        set_mail_conf('gmail/client_secret', '')
+        set_mail_conf('gmail/refresh_token', '')
+        print(get_mail_conf('gmail/client_id'))
         get_mail_conf('gmail/client_secret')
         get_mail_conf('gmail/refresh_token')
 

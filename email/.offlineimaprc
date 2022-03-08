@@ -1,12 +1,12 @@
 [general]
 pythonfile = ~/.offlineimap.py
 accounts = gmail,work
-socktimeout = 10
+socktimeout = 60
 
 [Account work]
 localrepository = local-work
 remoterepository = remote-work
-utf8foldernames = no
+utf8foldernames = yes
 
 [Repository local-work]
 type = Maildir
@@ -19,7 +19,7 @@ remoteusereval = get_mail_conf('work/username')
 remotepasseval = get_mail_conf('work/password')
 ssl = no
 ssl_version = tls1_2
-sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+sslcacertfile = /usr/local/etc/ca-certificates/cert.pem
 #
 # Folders to skip during sync.
 folderfilter = lambda foldername: foldername not in ['Deleted Items', 'Contacts', 'Calendar', 'Trash', 'INBOX/cr' ,'INBOX/wiki', 'INBOX/jekins', 'INBOX/ci', 'INBOX/ci/arm', 'INBOX/kms']
@@ -27,6 +27,7 @@ folderfilter = lambda foldername: foldername not in ['Deleted Items', 'Contacts'
 [Account gmail]
 localrepository = local-gmail
 remoterepository = remote-gmail
+utf8foldernames = yes
 proxy = SOCKS5:127.0.0.1:1080
 
 [Repository local-gmail]
@@ -49,5 +50,5 @@ oauth2_refresh_token_eval = get_mail_conf('gmail/refresh_token')
 nametrans = gmail_folder_to_local_folder
 folderfilter = should_include_folder
 ssl_version = tls1_2
-sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+sslcacertfile = /usr/local/etc/ca-certificates/cert.pem
 
