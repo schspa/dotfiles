@@ -18,6 +18,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+import sys
 import keyring
 import json
 
@@ -44,7 +45,7 @@ def set_mail_conf(repo, value):
 FOLDER_MAP = {
     'inbox':   'INBOX',
     "sent":    "[Gmail]/已发邮件",
-    "drafts":  "[Gmail]/垃圾邮件",
+    "drafts":  "[Gmail]/草稿",
     "trash":   "[Gmail]/已删除邮件",
     "archive": "[Gmail]/所有邮件",
     "mail-list/mine": "mail-list/mine",
@@ -59,6 +60,22 @@ def local_folder_to_gmail_folder(folder):
 
 def gmail_folder_to_local_folder(folder):
     return INVERSE_FOLDER_MAP.get(folder, folder)
+
+FOLDER_MAP_WORK = {
+    'inbox':   'INBOX',
+    "sent":    "已发送邮件",
+    "drafts":  "草稿",
+    "trash":   "已删除邮件",
+    "archive": "存档",
+}
+
+INVERSE_FOLDER_MAP_WORK = {v: k for k, v in FOLDER_MAP_WORK.items()}
+
+def local_folder_to_work_folder(folder):
+    return FOLDER_MAP_WORK.get(folder, folder)
+
+def work_folder_to_local_folder(folder):
+    return INVERSE_FOLDER_MAP_WORK.get(folder, folder)
 
 def should_include_folder(folder):
     return folder in INCLUDED_FOLDERS
