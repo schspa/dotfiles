@@ -82,18 +82,19 @@ def should_include_folder(folder):
 
 if __name__ == '__main__':
     import click
+    import getpass
     @click.command()
     @click.option('--verbose', is_flag=True)
     @click.option('-r', '--remote', default=None)
-    def cli(verbose, remote):
+    @click.option('-u', '--username', default=None)
+    def cli(verbose, remote, username):
         """Print config"""
+        password = None
 
         print(local_folder_to_gmail_folder("archive"))
         print(gmail_folder_to_local_folder("[Gmail]/Sent Mail"))
 
         if remote != "gmail":
-            username = getpass.getuser()
-
             if password is None:
                 password = getpass.getpass()
             elif password == "-":
