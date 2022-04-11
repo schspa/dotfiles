@@ -11,6 +11,9 @@ export PATH=$HOME/bin:$DOTFILES_DIR/bin:/usr/local/bin:$PATH
 eval "$(direnv hook zsh)"
 
 [[ $TERM == "tramp" ]] && unsetopt zle && PS1='$ ' && return
+if [[ "$INSIDE_EMACS" == 'vterm' ]]; then
+    export ANTIGEN_CACHE=$HOME/.antigen/init-vterm.zsh
+fi
 
 if [ -e ~/.config/antigen.zsh ]; then
     source ~/.config/antigen.zsh
@@ -42,7 +45,7 @@ plugins=(
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	plugins+=(
 		brew
-		osx
+		macos
 	)
 fi
 
@@ -50,8 +53,7 @@ for plugin in $plugins; do
     antigen bundle $plugin
 done
 
-if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
-    ANTIGEN_CACHE=$HOME/.antigen/init-vterm.zsh
+if [[ "$INSIDE_EMACS" == 'vterm' ]]; then
     antigen theme agnoster
 else
     antigen theme romkatv/powerlevel10k
