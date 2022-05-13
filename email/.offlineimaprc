@@ -37,19 +37,25 @@ localfolders = ~/Maildir/gmail/
 nametrans = local_folder_to_gmail_folder
 
 [Repository remote-gmail]
-type = Gmail
-holdconnectionopen = yes
-keepalive = 60
-maxconnections = 3
-realdelete = no
+type = IMAP
+remotehost = imap.gmail.com
 remoteuser = schspa@gmail.com
-auth_mechanisms = XOAUTH2
-oauth2_request_url = https://accounts.google.com/o/oauth2/token
-oauth2_client_id_eval = get_mail_conf('gmail/client_id')
-oauth2_client_secret_eval = get_mail_conf('gmail/client_secret')
-oauth2_refresh_token_eval = get_mail_conf('gmail/refresh_token')
+remotepasseval = get_authinfo_password("smtp.gmail.com", "schspa@gmail.com", 587)
+
+#type = Gmail
+#holdconnectionopen = yes
+#keepalive = 60
+#maxconnections = 3
+#realdelete = no
+#remoteuser = schspa@gmail.com
+#auth_mechanisms = XOAUTH2
+#oauth2_request_url = https://accounts.google.com/o/oauth2/token
+#oauth2_client_id_eval = get_mail_conf('gmail/client_id')
+#oauth2_client_secret_eval = get_mail_conf('gmail/client_secret')
+#oauth2_refresh_token_eval = get_mail_conf('gmail/refresh_token')
+
 nametrans = gmail_folder_to_local_folder
 folderfilter = should_include_folder
 ssl_version = tls1_2
 sslcacertfile = OS-DEFAULT
-
+#
