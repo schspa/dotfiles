@@ -22,7 +22,7 @@ ssl = no
 
 #
 # Folders to skip during sync.
-folderfilter = lambda foldername: foldername not in ['Deleted Items', 'Contacts', 'Calendar', 'Trash', 'INBOX/cr' ,'INBOX/wiki', 'INBOX/jekins', 'INBOX/ci', 'INBOX/ci/arm', 'INBOX/kms']
+folderfilter = lambda foldername: foldername not in ['Deleted Items', 'Contacts', 'Calendar', 'Trash', 'INBOX/cr' ,'INBOX/wiki', 'INBOX/jekins', 'INBOX/ci', 'INBOX/ci/arm', 'INBOX/kms', 'INBOX/jira']
 nametrans = work_folder_to_local_folder
 
 [Account gmail]
