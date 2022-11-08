@@ -85,6 +85,8 @@ def work_folder_to_local_folder(folder):
     return INVERSE_FOLDER_MAP_WORK.get(folder, folder)
 
 def should_include_folder(folder):
+    if folder == "[Gmail]/草稿":
+        return False
     return folder in INCLUDED_FOLDERS
 
 if __name__ == '__main__':
