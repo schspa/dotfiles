@@ -1,47 +1,55 @@
+# -*- mode: sh; -*-
+
 if [[ "${TMUX}_${MY_ENV_EXPORTED}"x == "true"x ]]; then
    return 0
+fi
+
+if [ -d ${MY_HOMEBREW_BASE}/opt/llvm/bin ]; then
+   export PATH="${MY_HOMEBREW_BASE}/opt/llvm/bin:$PATH"
 fi
 
 if [ -d $HOME/go/bin ]; then
    export PATH=$HOME/go/bin:$PATH
 fi
 
-export PATH=~/bin:~/node_modules/.bin:$PATH
+export PATH=$HOME/bin:$HOME/node_modules/.bin:$PATH
+node_bin=$(dirname $(realpath $(which node)))
+export PATH=$node_bin:$PATH
 
-if [ -d /usr/local/opt/llvm/bin ]; then
-    export PATH="/usr/local/opt/llvm/bin:$PATH"
-fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    export PATH=/Library/TeX/texbin:$PATH
-    ## for cross compile in macos
+   export HOMEBREW_NO_AUTO_UPDATE=1
+   export PATH=/Library/TeX/texbin:$PATH
 
-    for file in /usr/local/opt/*
-    do
-        if [ -d $file ] && [ -d $file/libexec/gnubin ]
-        then
-              export PATH=$file/libexec/gnubin:$PATH
-        fi
-        if [ -d $file ] && [ -d $file/libexec/bin ]
-        then
-              export PATH=$file/libexec/bin:$PATH
-        fi
-    done
-    ## homebrew mirror
-    ## export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
-    if [ -d $HOME/work/x-tools/aarch64-unknown-linux-gnu/bin ]; then
-       export PATH="$HOME/work/x-tools/aarch64-unknown-linux-gnu/bin:$PATH"
-    fi
-    if [ -d /usr/local/opt/python/Frameworks/Python.framework/Versions/Current/bin ]; then
-       export PATH="/usr/local/opt/python/Frameworks/Python.framework/Versions/Current/bin:$PATH"
-    fi
+   ## for cross compile in macos
+   if [ -d ${MY_HOMEBREW_BASE}/opt/ ]; then
+      for file in ${MY_HOMEBREW_BASE}/opt/*
+      do
+          if [ -d $file ] && [ -d $file/libexec/gnubin ]
+          then
+             export PATH=$file/libexec/gnubin:$PATH
+          fi
+          if [ -d $file ] && [ -d $file/libexec/bin ]
+          then
+             export PATH=$file/libexec/bin:$PATH
+          fi
+      done
+   fi
+   ## homebrew mirror
+   ## export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+   if [ -d $HOME/work/x-tools/aarch64-unknown-linux-gnu/bin ]; then
+      export PATH="$HOME/work/x-tools/aarch64-unknown-linux-gnu/bin:$PATH"
+   fi
+   if [ -d ${MY_HOMEBREW_BASE}/opt/python/Frameworks/Python.framework/Versions/Current/bin ]; then
+      export PATH="${MY_HOMEBREW_BASE}/opt/python/Frameworks/Python.framework/Versions/Current/bin:$PATH"
+   fi
 fi
 
 if [[ "$SSH_CONNECTION" != "" && "$SCHSPA_SSHFS_DIR" != "" && "$SCHSPA_SSHFS_TARGET" != "" ]]; then
-	echo "mount sshfs on $SCHSPA_SSHFS_TARGET"
-	if [ "`ls -A ${SCHSPA_SSHFS_TARGET}`" = "" ]; then
-		sshfs $(echo $SSH_CONNECTION | awk '{print $1}'):$SCHSPA_SSHFS_DIR "$HOME/$SCHSPA_SSHFS_TARGET"
-	fi
+   echo "mount sshfs on $SCHSPA_SSHFS_TARGET"
+   if [ "`ls -A ${SCHSPA_SSHFS_TARGET}`" = "" ]; then
+      sshfs $(echo $SSH_CONNECTION | awk '{print $1}'):$SCHSPA_SSHFS_DIR "$HOME/$SCHSPA_SSHFS_TARGET"
+   fi
 fi
 
 if [ -e ~/.shell.local.rc ]; then

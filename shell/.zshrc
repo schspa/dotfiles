@@ -1,3 +1,13 @@
+if [ -d /opt/homebrew ]; then
+    export MY_HOMEBREW_BASE=/opt/homebrew
+else
+    export MY_HOMEBREW_BASE=/usr/local
+fi
+
+if [ -d ${MY_HOMEBREW_BASE}/bin ]; then
+    export PATH="${MY_HOMEBREW_BASE}/bin:$PATH"
+fi
+
 DOTFILES_DIR=$(dirname `realpath ~/.zshrc`)
 
 if [ -d $DOTFILES_DIR ]; then
@@ -15,15 +25,19 @@ if [[ "$INSIDE_EMACS" == 'vterm' ]]; then
     export ANTIGEN_CACHE=$HOME/.antigen/init-vterm.zsh
 fi
 
-if [ -e ~/.config/antigen.zsh ]; then
-    source ~/.config/antigen.zsh
-elif [ -e /usr/local/share/antigen/antigen.zsh ]; then
-    source /usr/local/share/antigen/antigen.zsh
-elif [ -e /usr/share/zsh/share/antigen.zsh ]; then
-    source /usr/share/zsh/share/antigen.zsh
-elif [ -e /usr/share/zsh-antigen/antigen.zsh ]; then
-    source /usr/share/zsh-antigen/antigen.zsh
-fi
+antigen_bases=(
+    "${HOME}/.config/antigen.zsh"
+    "/usr/local/share/antigen/antigen.zsh"
+    "/usr/share/zsh/share/antigen.zsh"
+    "/usr/share/zsh-antigen/antigen.zsh"
+    "/opt/homebrew/share/antigen/antigen.zsh")
+
+for antigen_base in "${antigen_bases[@]}"
+do
+    if [ -e $antigen_base ]; then
+        source $antigen_base
+    fi
+done
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
