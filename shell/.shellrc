@@ -12,6 +12,10 @@ if [ -d $HOME/go/bin ]; then
    export PATH=$HOME/go/bin:$PATH
 fi
 
+if [ -d $HOME/work/src/script/ ]; then
+   export PATH=$HOME/work/src/script:$PATH
+fi
+
 export PATH=$HOME/bin:$HOME/node_modules/.bin:$PATH
 node_bin=$(dirname $(realpath $(which node)))
 export PATH=$node_bin:$PATH
