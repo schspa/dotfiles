@@ -77,6 +77,10 @@ setup_dotfiles() {
             fmt_error "git clone of dotfiles repo failed"
             exit 1
         }
+        pushd "$DOTFILES"
+        git submodule init
+        git submodule update
+        popd
     fi
 
     cd ~/.config/dotfiles && ./dotfiles.sh install
