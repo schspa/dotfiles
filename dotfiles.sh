@@ -36,7 +36,13 @@ dotfiles-init() {
 }
 
 dotfiles-rebuild() {
-    stow --dir=$DOTFILES --target=$HOME -vv $@
+    if [[ "$1"x == "tmux" ]]; then
+        ln -sf $DOTFILES/tmux/.tmux/.tmux.conf ${HOME}/
+        ln -sf $DOTFILES/tmux/.tmux/.tmux.conf.local ${HOME}/
+        ln -sf $DOTFILES/tmux/.tmux ${HOME}/
+    else
+        stow --dir=$DOTFILES --target=$HOME -vv $@
+    fi
     if [ $? != 0 ]; then
         echo "$@ install failed"
     fi
