@@ -63,14 +63,21 @@ setup_dotfiles() {
         exit 1
     }
 
-    git clone -c core.eol=lf -c core.autocrlf=false \
-        -c fsck.zeroPaddedFilemode=ignore \
-        -c fetch.fsck.zeroPaddedFilemode=ignore \
-        -c receive.fsck.zeroPaddedFilemode=ignore \
-        --depth=1 --branch "$BRANCH" "$REMOTE" "$DOTFILES" || {
-        fmt_error "git clone of dotfiles repo failed"
-        exit 1
-    }
+    if [ -d $DOTFILES ]; then
+        if [ $(git rev-parse --is-inside-work-tree 2>/dev/null || echo false) != false ]; then
+            git fetch $REMOTE/refs/heads/$BRANCH
+            git reset --hard FETCH_HEAD
+        fi
+    else
+        git clone -c core.eol=lf -c core.autocrlf=false \
+            -c fsck.zeroPaddedFilemode=ignore \
+            -c fetch.fsck.zeroPaddedFilemode=ignore \
+            -c receive.fsck.zeroPaddedFilemode=ignore \
+            --depth=1 --branch "$BRANCH" "$REMOTE" "$DOTFILES" || {
+            fmt_error "git clone of dotfiles repo failed"
+            exit 1
+        }
+    fi
 
     cd ~/.config/dotfiles && ./dotfiles.sh install
 
@@ -81,12 +88,6 @@ main() {
     setup_color
 
     check_depencys
-
-    if [ -d "$DOTFILES" ]; then
-        echo "${YELLOW}The $DOTFILES folder already exists .${RESET}"
-        echo "You'll need to remove it if you want to reinstall."
-        exit 1
-    fi
 
     setup_dotfiles
     printf "$GREEN"
