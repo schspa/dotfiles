@@ -5,5 +5,10 @@ if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
     }
     sendtoemacs $@
 else
-    emacsclient -nw --alternate-editor="" $@
+    emacsclient_bin=$(which emacsclient)
+    if [[ $? == 0 ]]; then
+       emacsclient -nw --alternate-editor="" $@
+    else
+        vim $@
+    fi
 fi
