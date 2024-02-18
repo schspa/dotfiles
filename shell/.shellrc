@@ -16,6 +16,10 @@ if [ -d $HOME/work/src/script/ ]; then
    export PATH=$HOME/work/src/script:$PATH
 fi
 
+if [ -d /Library/TeX/texbin ]; then
+   export PATH=/Library/TeX/texbin:$PATH
+fi
+
 export PATH=$HOME/bin:$HOME/node_modules/.bin:$PATH
 node_bin=$(dirname $(realpath $(which node)))
 export PATH=$node_bin:$PATH
