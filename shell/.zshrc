@@ -53,7 +53,6 @@ plugins=(
     wd
     z
     sudo
-	docker
     git
     emacs
     pip
